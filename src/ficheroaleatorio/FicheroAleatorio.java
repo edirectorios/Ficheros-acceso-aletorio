@@ -496,6 +496,87 @@ public class FicheroAleatorio {
     }
     
     
+    private void bajaNew(int numero) throws IOException{
+        File fichero = new File("listado_jugadores.dat");
+        RandomAccessFile randFile = new RandomAccessFile(fichero,"rw");
+        StringBuffer buffer = null;
+              
+        // calculamos la posicion del registro
+        int pos = 0;
+        if(numero == 1){
+         pos = 1;
+        }else {
+         pos = (numero -1) * 66;
+        }
+        
+        char nombre[] = new char[6];
+        char equipo[] = new char[20];
+        
+        // posicionamos el puntero al final del fichero
+        randFile.seek(pos);
+        
+        try {            
+            // leemos el numero del jugador
+            randFile.readInt();                
+            
+            // leemos su nombre
+            for(int i = 0; i  < 6; i++){ 
+                nombre[i] = randFile.readChar(); 
+            } 
+            
+            // leemos los partidos jugados
+            randFile.readInt();
+            
+            // leemos la edad del jugador
+            randFile.readInt();
+            
+            // leemos el nombre del equipo
+            for(int i = 0; i  < 20; i++){ 
+                equipo[i] = randFile.readChar(); 
+            }
+            
+            // leemos su estado
+            char activo = randFile.readChar();
+            
+            // si el estado activo actual no es 'S' y se ha solicitado una baja el jugador ya estaba de baja
+            if (!String.valueOf(activo).equals("S")) { System.out.println("El jugador ya esta dado de baja"); }
+            else {
+              
+              // si el estado activo es 'S' posicionamos de nuevo al comienzo del registro para cambiar la letra
+              randFile.seek(pos-1);
+              
+              // leemos el id del jugador
+              randFile.readInt();                
+            
+              // leemos el nombre
+              for(int i = 0; i  < 6; i++){ 
+                nombre[i] = randFile.readChar(); 
+              } 
+
+              // leemos partidos jugados
+              randFile.readInt();
+              
+              // leemos la edad
+              randFile.readInt();
+
+              // leemos el equipo
+              for(int i = 0; i  < 20; i++){ 
+                equipo[i] = randFile.readChar(); 
+              }
+              
+              // y guardamos el estado activo a N
+              randFile.writeChars("N");
+            }
+
+            randFile.close();
+            
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        
+    }
+    
+    
     private void consulta(int numeroJugador) throws FileNotFoundException,IOException{
         
         if(!this.LocalizarJugador(numeroJugador)) { System.out.println("El jugador no existe");}
