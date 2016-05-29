@@ -29,6 +29,7 @@ public class FicheroAleatorio {
     public static void main(String[] args) {        
        
         // instanciamos la clase y llamamos al metodo menu de la misma
+        // creacion del objeto menu
         FicheroAleatorio obj = new FicheroAleatorio();
         obj.menu();
             
