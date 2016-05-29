@@ -43,6 +43,7 @@ public class FicheroAleatorio {
     private void CreaConexion(){
         // establecemos la conexion con la BBDD
         try {
+            // conexion a mysql
             Class.forName("com.mysql.jdbc.Driver");
             FicheroAleatorio obj = new FicheroAleatorio();
             
