@@ -19,10 +19,20 @@ public class Equipo {
         this.equipo = new ArrayList<>();
     }
     
+    /**
+     * Metodo añadir
+     * Este metodo sirve para añadir un jugador a un equipo
+     * @param jugador El jugador a añadir
+     */
     public void añadir(Jugador jugador){
         this.equipo.add(jugador);
     }
     
+    /**
+     * Metodo eliminar
+     * Este metodo sirve para eliminar un jugador de un equipo
+     * @param jugador El jugador a ser eliminado
+     */
     public void eliminar(Jugador jugador){
         this.equipo.remove(jugador);
     }
